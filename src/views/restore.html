@@ -1,0 +1,51 @@
+<div class="datastore-filter-settings">
+<h4><b>Restore previous value?</b></h4>
+<div class="well help-text">
+<form name="datastoreForm">
+    <div class="form-group">
+        <b>namespace:</b> {{namespace}}
+    </div>
+    <div class="form-group">
+        <b>key:</b> {{key}}
+    </div>
+    <div class="form-group preval">
+        <b>Previous value:</b> {{value}}
+    </div>
+    <div class="form-controls-wrap">
+        <button class="btn btn-warning" id="restorebutton">
+            <i class="fa fa-step-backward" aria-hidden="true"></i> <span ng-bind="'Restore'"></span>
+        </button>
+        <a ui-sref="list">
+	        <button class="btn btn-danger">
+			    <i class="fa fa-times"></i> <span ng-bind="'Cancel'"></span>
+	        </button>
+        </a>
+    </div>
+</form>
+</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+toastr.options = {
+  "closeButton": true,
+  "debug": true,
+  "newestOnTop": true,
+  "progressBar": true,
+  "positionClass": "toast-top-full-width",
+  "preventDuplicates": true,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": 0,
+  "extendedTimeOut": 0,
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut",
+  "tapToDismiss": true
+}
+$('#restorebutton').click(function() {
+   toastr.warning("Are you sure you want to restore this value?<br /><br /><button type=\"button\" class=\"btn clear\">Yes</button> <button type=\"button\" class=\"btn clear\">No</button>");
+});
+});
+</script>

@@ -1,0 +1,29 @@
+<div class="datastore-filter-settings">
+<h4><b>{{namespace}} Edit</b></h4>
+<form name="datastoreForm" ng-submit="editDatastore()">
+    <div class="form-group">
+        <span class="list-name"><b>namespace:</b> {{namespace}}</span>
+    </div>
+    <div class="form-group">
+        <span class="list-name"><b>key:</b> {{key}}</span>
+    </div>
+    <div class="form-group">
+    <span class="list-name"><b>Velue:</b></span>
+        <span class="form-control-wrap" ng-class="{'ng-valid': datastoreForm.value.$valid}">
+            <textarea class="form-control" name="value" type="text" ng-required="true">{{value}}</textarea>
+        </span>
+        <p class="error validationerror" ng-show="datastoreForm.value.$invalid && datastoreForm.value.$touched">
+        You must enter a new value.</p>
+    </div>
+    <div class="form-controls-wrap">
+        <button class="btn btn-success" ng-class="{ 'processing': addDatastore.isProcessingaddDatastore }" ng-disabled="!datastoreForm.$valid || addDatastore.isProcessingaddDatastore" ng-click="addDatastore.addDatastore()">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i> <span ng-bind="addDatastore.getErrorString(datastoreForm) || 'Update'"></span>
+        </button>
+        <a ui-sref="list">
+            <button class="btn btn-danger">
+                <i class="fa fa-times"></i> <span ng-bind="addDatastore.getErrorString(datastoreForm) || 'Cancel'"></span>
+            </button>
+        </a>
+    </div>
+</form>
+</div>

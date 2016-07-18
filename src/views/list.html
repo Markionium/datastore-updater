@@ -1,0 +1,181 @@
+<div class="row">
+    <div class="col-md-12 main-display datastoremain">
+        <div class="datastore-filter-settings">
+            	<div class="search-form">
+                	<div class="filters">
+                    	<div class="filterForm form-group">
+                            <div class="row">
+                                <div class="select-filters col-sm-6">
+                                <h4><b>Select an App</b></h4>
+                                    <div class="select-filtertype">
+
+                                        <ui-select ng-model="selectedItem">
+                                            <ui-select-match placeholder="------------">
+                                                <span>{{namespace}}</span>
+                                            </ui-select-match>
+                                            <ui-select-choices repeat="item in namespace">
+                                                <span>{{item}}</span>
+                                            </ui-select-choices>
+                                        </ui-select>
+
+                                    </div>
+                                </div>
+                                <div class="select-filters col-sm-6">
+                                <h4><b>Search</b></h4>
+                                    <div class="select-filtertype">
+                                        <input class="form-control" placeholder="Search by namespace, key or value" type="text">
+                                    </div>
+                                </div>
+		                    </div>
+		                    <div class="row" >&nbsp;</div>
+							<div class="row" >
+			                    <div class="select-filters col-sm-12">
+	                                <a ui-sref="add">
+	                                    <button class="btn btn-default btn-new-datastore">
+	                                    <i class="fa fa-plus-square-o"></i> <span>Add New Data Store Entry</span></button>
+	                                </a>
+			                    </div>
+							</div>
+		                </div>
+		            </div>
+		        </div>
+	            <div class="filters-collapse" collapse="isCollapsed">
+
+	            <div class="row" >
+                    <div class="select-filters col-sm-6">
+                    	<h4 class="app-result-title"><b>Data Store Results</b></h4>
+                    </div>
+                    <div class="select-filters col-sm-6">
+                    	<div class="btn-group pull-right">
+						    <label>Sort by:
+						      <select ng-model="dataOrder" class="btn btn-default">
+						        <option value="namespace">namespace</option>
+						        <option value="key">key</option>
+						        <option value="value">value</option>
+						      </select>
+						    </label>
+					    </div>
+                    </div>
+			    </div>
+
+                <div class="filters well">
+                    <div class="search-result">
+
+                        <div class="loading-mask" ng-show="selectedItem">
+                            <div class="loading-mask-inner"><i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Loading Data Store...</div>
+                        </div>
+
+                        <ul class="updater-list">
+                            <li class="updater-list-row" ng-model="datastoreList">
+                                <div class="result">
+                                    <div class="row updater-details-main">
+                                        <div class="col-sm-12">
+                                            <div class="deactivate">
+                                                    <div class="button-group">
+                                                        <!--a ng-click="show = !show"-->
+                                                        <a ui-sref="edit">
+                                                            <button class="btn btn-default">
+                                                                <i class="fa fa-pencil-square-o"></i>
+                                                                Edit
+                                                            </button>
+                                                        </a>
+                                                        <a ui-sref="restore">
+	                                                    	<button class="btn btn-warning">
+	                                                            <i class="fa fa-step-backward" aria-hidden="true"></i>
+	                                                            Restore
+	                                                        </button>
+                                                        </a>
+                                                        <button class="btn btn-danger" id="deletebutton">
+                                                            <i class="fa fa-trash-o"></i>
+                                                            Delete
+                                                        </button>
+                                                 </div>
+                                             </div>
+                                            <div>
+                                            <span class="list-name"><b>namespace:</b> {{namespace}}</span><br>
+                                            <span class="list-key"><b>key:</b> {{key}}</span><br>
+                                            <span class="list-value"><b>value:</b> {{value}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        	</li>
+                   	 	</ul>
+                    </div>
+            	</div>
+
+           <!--div class="updater-details-view" ng-show="show">
+            <div class="datastore-filter-settings">
+			<h4><b>{{namespace}} Edit</b></h4>
+				<form name="datastoreForm" ng-submit="editDatastore()">
+				    <div class="form-group">
+				        <span class="list-name"><b>namespace:</b> {{namespace}}</span>
+				    </div>
+				    <div class="form-group">
+				        <span class="list-name"><b>key:</b> {{key}}</span>
+				    </div>
+				    <div class="form-group">
+				    <span class="list-name"><b>Velue:</b></span>
+				        <span class="form-control-wrap" ng-class="{'ng-valid': datastoreForm.value.$valid}">
+				            <textarea class="form-control" name="value" type="text" ng-required="true">{{value}}</textarea>
+				        </span>
+				        <p class="error validationerror" ng-show="datastoreForm.value.$invalid && datastoreForm.value.$touched">
+				        You must enter a new value.</p>
+				    </div>
+				    <div class="form-controls-wrap">
+				        <button class="btn btn-success" ng-class="{ 'processing': addDatastore.isProcessingaddDatastore }" ng-disabled="!datastoreForm.$valid || addDatastore.isProcessingaddDatastore" ng-click="addDatastore.addDatastore()">
+				            <span ng-bind="addDatastore.getErrorString(datastoreForm) || 'Update Entry'"></span>
+				        </button>
+				        <a ui-sref="list">
+				            <button class="btn btn-danger">
+				                <i class="fa fa-times"></i> <span ng-bind="addDatastore.getErrorString(datastoreForm) || 'Cancel'"></span>
+				            </button>
+				        </a>
+				    </div>
+				</form>
+			</div>
+        </div-->
+
+	            <div class="pagination">
+	                <pagination
+	                            total-items="pagination.getTotalItemCount()"
+	                            items-per-page="pagination.getPageSize()"
+	                            ng-model="currentPage"
+	                            ng-change="pageChanged()"
+	                            max-size="10"
+	                            boundary-links="true"
+	                            rotate="false">
+	                </pagination>
+	            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+toastr.options = {
+  "closeButton": true,
+  "debug": true,
+  "newestOnTop": true,
+  "progressBar": true,
+  "positionClass": "toast-top-full-width",
+  "preventDuplicates": true,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": 0,
+  "extendedTimeOut": 0,
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut",
+  "tapToDismiss": true
+}
+$('#deletebutton').click(function() {
+   toastr.error("Are you sure you want to delete this?<br /><br /><button type=\"button\" class=\"btn clear\">Yes</button> <button type=\"button\" class=\"btn clear\">No</button>");
+});
+$('#restorebutton').click(function() {
+   toastr.warning("Are you sure you want to restore this value?<br /><br />Value: {\"targets\":[\"2016Oct\"],\"results\":[\"2016Q1\"]} <br /><br /><button type=\"button\" class=\"btn clear\">Yes</button> <button type=\"button\" class=\"btn clear\">No</button>");
+});
+});
+</script>
