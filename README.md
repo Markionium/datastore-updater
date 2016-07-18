@@ -4,7 +4,7 @@ Data Store Updater app for DATIM
 
 ## Set up for local development
 
-### Step1: Setup the dhis.json config file
+### Step 1: Setup the dhis.json config file
 To get started clone the repository and add a `dhis.json` file to the root of the project. This will help gulp determine where your dhis2 instance is running and will make it easier to deploy the app. Additionally it will also update the webapp manifest for you so you do not have to install the app.
 
 The dhis.json file should look something like the following.
