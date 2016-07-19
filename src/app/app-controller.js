@@ -1,17 +1,19 @@
 angular.module('PEPFAR.datastore').controller('appController', appController);
 
-function appController($scope, $http) {
+function appController($scope, dataStore) {
 
-    $http.get('/api/dataStore/').success(function (data) {
-        $scope.namespace = data;
-    });
+    dataStore.getNameSpaces()
+        .then(function (data) {
+            $scope.namespace = data;
+        });
 
-    $http.get('/api/dataStore/dedupe').success(function (data) {
-        $scope.key = data;
-    });
+    dataStore.getKeysInNamespace('dedupe')
+        .then(function (data) {
+            $scope.key = data;
+        });
 
-    $http.get('/api/dataStore/dedupe/periodSettings').success(function (data) {
-        $scope.value = data;
-    });
-
+    dataStore.getValuesForKeyInNamespace('dedupe', 'periodSettings')
+        .then(function (data) {
+            $scope.value = data;
+        });
 }

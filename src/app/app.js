@@ -34,7 +34,11 @@ angular.module('PEPFAR.datastore', [
      'ui.router'
 ]);
 
-angular.module('PEPFAR.datastore').config(routerConfig);
+angular.module('PEPFAR.datastore')
+    .config(routerConfig)
+    .run(function (Restangular, webappManifest) {
+        Restangular.setBaseUrl([webappManifest.activities.dhis.href, 'api'].join('/'));
+    });
 
 //==================================================================================
 // Bootstrap the app manually
