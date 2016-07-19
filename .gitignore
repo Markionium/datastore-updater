@@ -4,10 +4,9 @@
 .sass-cache
 
 node_modules/
-vendor/
+vendor/*
 !vendor/ngBootstrapper
 !vendor/notify
-!vendor/ui-router
 build/
 temp/
 
