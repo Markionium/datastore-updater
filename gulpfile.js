@@ -129,7 +129,7 @@ gulp.task('build-prod', function () {
     });
 });
 
-gulp.task('modify-manifest', function () {
+gulp.task('modify-manifest', function (done) {
     var fs = require('fs');
 
     fs.readFile('build/manifest.webapp', 'utf8', function (err, data) {
@@ -149,8 +149,9 @@ gulp.task('modify-manifest', function () {
 
         fs.writeFile('build/manifest.webapp', JSON.stringify(manifest, undefined, 2), function (err) {
             if (err) {
-                console.log('Failed to save modified manifest');
+                return console.log('Failed to save modified manifest');
             }
+            done();
         });
     });
 });

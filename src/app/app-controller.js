@@ -12,7 +12,7 @@ function appController($scope, dataStore) {
             $scope.key = data;
         });
 
-    dataStore.getValuesForKeyInNamespace('dedupe', 'periodSettings')
+    dataStore.getValueForKeyInNamespace('dedupe', 'periodSettings')
         .then(function (data) {
             $scope.value = data;
         });

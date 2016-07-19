@@ -9,12 +9,12 @@
                                 <h4><b>Select an App</b></h4>
                                     <div class="select-filtertype">
 
-                                        <ui-select ng-model="selectedItem">
+                                        <ui-select ng-model="$listCtrl.currentNamespace">
                                             <ui-select-match placeholder="------------">
-                                                <span>{{namespace}}</span>
+                                                <span ng-bind="$listCtrl.currentNamespace"></span>
                                             </ui-select-match>
-                                            <ui-select-choices repeat="item in namespace">
-                                                <span>{{item}}</span>
+                                            <ui-select-choices repeat="item in $listCtrl.namespaces">
+                                                <span ng-bind="item"></span>
                                             </ui-select-choices>
                                         </ui-select>
 
@@ -66,14 +66,14 @@
                         </div>
 
                         <ul class="updater-list">
-                            <li class="updater-list-row" ng-model="datastoreList">
+                            <li class="updater-list-row" ng-repeat="dataStoreItem in $listCtrl.dataStoreItems">
                                 <div class="result">
                                     <div class="row updater-details-main">
                                         <div class="col-sm-12">
                                             <div class="deactivate">
                                                     <div class="button-group">
                                                         <!--a ng-click="show = !show"-->
-                                                        <a ui-sref="edit">
+                                                        <a ui-sref="edit({namespace: dataStoreItem.namespace, key: dataStoreItem.key})">
                                                             <button class="btn btn-default">
                                                                 <i class="fa fa-pencil-square-o"></i>
                                                                 Edit
@@ -92,9 +92,9 @@
                                                  </div>
                                              </div>
                                             <div>
-                                            <span class="list-name"><b>namespace:</b> {{namespace}}</span><br>
-                                            <span class="list-key"><b>key:</b> {{key}}</span><br>
-                                            <span class="list-value"><b>value:</b> {{value}}</span>
+                                            <span class="list-name"><b>namespace:</b> {{dataStoreItem.namespace}}</span><br>
+                                            <span class="list-key"><b>key:</b> {{dataStoreItem.key}}</span><br>
+                                            <span class="list-value"><b>value:</b> {{dataStoreItem.value}}</span>
                                             </div>
                                         </div>
                                     </div>

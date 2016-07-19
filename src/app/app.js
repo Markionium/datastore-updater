@@ -4,15 +4,29 @@ function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('list', {
             url: '/list',
-            templateUrl: 'views/list.html'
+            templateUrl: 'views/list.html',
+            controller: 'ListController as $listCtrl'
         })
         .state('add', {
             url: '/add',
             templateUrl: 'views/add.html'
         })
         .state('edit', {
-            url: '/edit',
-            templateUrl: 'views/edit.html'
+            url: '/edit/{namespace}/{key}',
+            templateUrl: 'views/edit.html',
+            controller: 'EditController as $editCtrl',
+            resolve: {
+                dataStoreEntry: function ($stateParams, dataStore) {
+                    return dataStore.getValueForKeyInNamespace($stateParams.namespace, $stateParams.key)
+                        .then(function (value) {
+                            return {
+                                namespace: $stateParams.namespace,
+                                key: $stateParams.key,
+                                value: value
+                            };
+                        });
+                }
+            }
         })
         .state('restore', {
             url: '/restore',
@@ -37,7 +51,11 @@ angular.module('PEPFAR.datastore', [
 angular.module('PEPFAR.datastore')
     .config(routerConfig)
     .run(function (Restangular, webappManifest) {
-        Restangular.setBaseUrl([webappManifest.activities.dhis.href, 'api'].join('/'));
+        if (webappManifest.activities.dhis.href === '*') {
+            Restangular.setBaseUrl('/api');
+        } else {
+            Restangular.setBaseUrl([webappManifest.activities.dhis.href, 'api'].join('/'));
+        }
     });
 
 //==================================================================================
